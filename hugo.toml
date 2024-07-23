@@ -14,8 +14,8 @@ tag = 'tags'
 description = "Welcome to my internet corner!"
 
 # Appearance settings
-theme = 'auto'
-colorPalette = 'default'
+theme = 'dark'
+colorPalette = 'catpuccin'
 hideHeader = false
 
 # Intro on main page, content is markdown
@@ -67,7 +67,8 @@ url = "/about"
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]
-style = 'algol'
+#style = 'algol'
+noClasses = false
 
 # Giscus comments
 #[params.giscus]

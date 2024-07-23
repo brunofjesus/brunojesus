@@ -5,7 +5,7 @@ summary: "My approach to learning Symfony"
 description: "My approach to learning Symfony"
 toc: true
 readTime: true
-autonumber: true
+autonumber: false
 math: true
 tags: ["programming","php"]
 showTags: false
