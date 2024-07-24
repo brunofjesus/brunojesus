@@ -1,8 +1,8 @@
 ---
 title: "Learning Kubernetes"
 date: "2020-08-20"
-summary: "A beginers guide to Kubernetes"
-description: "A beginers guide to Kubernetes"
+summary: "A beginners guide to Kubernetes"
+description: "A beginners guide to Kubernetes"
 toc: true
 readTime: true
 autonumber: true
