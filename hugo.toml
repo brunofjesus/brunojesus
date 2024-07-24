@@ -19,12 +19,12 @@ colorPalette = 'catpuccin'
 hideHeader = false
 
 # Intro on main page, content is markdown
-homeIntroTitle = 'Hi!'
-homeIntroContent = """
-My name is Bruno Jesus, and I am a software developer currently working for Commercetools.
-
-I hope some of my notes have been useful to you. If you have any suggestions or would like to collaborate, please feel free to contact me.
-"""
+#homeIntroTitle = 'Hi!'
+#homeIntroContent = """
+#My name is Bruno Jesus, and I am a software developer currently working for Commercetools.
+#
+#I hope some of my notes have been useful to you. If you have any suggestions or would like to collaborate, please feel free to contact me.
+#"""
 
 # Collection to display on home
 homeCollectionTitle = 'Posts'
@@ -41,15 +41,11 @@ breadcrumbs = true
 # Social icons
 [[params.social]]
 name = "linkedin"
-url = "https://www.linkedin.com/in/user/"
-
-[[params.social]]
-name = "medium"
-url = "https://medium.com/@user"
+url = "https://www.linkedin.com/in/bruno-jesus-0ab943a9/"
 
 [[params.social]]
 name = "github"
-url = "https://github.com/user"
+url = "https://github.com/brunofjesus"
 
 # Main menu pages
 [[params.menu]]
@@ -60,14 +56,9 @@ url = "/"
 name = "posts"
 url = "/posts"
 
-[[params.menu]]
-name = "about"
-url = "/about"
-
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]
-#style = 'algol'
 noClasses = false
 
 # Giscus comments
