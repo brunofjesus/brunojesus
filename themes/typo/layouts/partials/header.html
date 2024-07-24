@@ -1,0 +1,41 @@
+{{/* Header */}}
+
+<div class="header">
+
+    {{ if or (not (.Param "hideHeader")) .IsHome }}
+
+    <h1 class="header-title">{{ site.Title }}</h1>
+
+    <div class="flex header-menu">
+      <div class="flex">
+        {{ $currentPage := . }}
+
+        {{ with site.Params.menu }}
+        {{ range . }}
+        <p class="{{ if eq .url $currentPage.Path }} bold {{end}}">
+            <a href="{{.url}}">
+                /{{.name }}
+            </a>
+        </p>
+        {{ end }}
+        {{ end }}
+      </div>
+
+      {{ with site.Params.social }}
+      <div class="social-icons">
+          {{- range . }}
+          <a href="{{ trim .url " " | safeURL }}" target="_blank"
+              rel="noopener noreferrer me"
+              title="{{ (.title | default .name) | title }}">
+              {{ partial "svg.html" . }}
+          </a>
+          {{- end }}
+      </div>
+      {{ end }}
+
+
+    </div>
+
+    {{ end }}
+
+</div>

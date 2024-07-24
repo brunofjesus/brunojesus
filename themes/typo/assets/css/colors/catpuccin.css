@@ -1,0 +1,56 @@
+:root {
+    --content-primary: rgb(76, 79, 105);
+    --content-secondary: rgb(108, 111, 133);
+    --background: rgb(239, 241, 245);
+    --code-background: rgb(230, 233, 239);
+    --code-border: rgb(188, 192, 204);
+}
+
+.dark {
+    --content-primary: rgb(205, 214, 244);
+    --content-secondary: rgb(166, 173, 200);
+    --background: rgb(30, 30, 46);
+    --code-background: rgb(17, 17, 27);
+    --code-border: rgb(137, 180, 250);
+
+    --cp-bg: #1e1e2e;           /* Background */
+    --cp-bg-darker: #1a1b26;    /* Darker Background */
+    --cp-fg: #cdd6f4;           /* Foreground */
+    --cp-fg-darker: #a6accd;    /* Darker Foreground */
+    --cp-red: #f38ba8;          /* Red */
+    --cp-green: #a6e3a1;        /* Green */
+    --cp-yellow: #f9e2af;       /* Yellow */
+    --cp-blue: #89b4fa;         /* Blue */
+    --cp-magenta: #f5c2e7;      /* Magenta */
+    --cp-cyan: #94e2d5;         /* Cyan */
+    --cp-orange: #fab387;       /* Orange */
+    --cp-pink: #f5c2e7;         /* Pink */
+    --cp-purple: #cba6f7;       /* Purple */
+    --cp-teal: #8bd5ca;         /* Teal */
+    --cp-rosewater: #f2cdcd;    /* Rosewater */
+    --cp-overlay0: #6c7086;     /* Overlay 0 */
+    --cp-overlay1: #7f849c;     /* Overlay 1 */
+    --cp-overlay2: #9399b2;     /* Overlay 2 */
+    --cp-surface0: #313244;     /* Surface 0 */
+    --cp-surface1: #45475a;     /* Surface 1 */
+    --cp-surface2: #585b70;     /* Surface 2 */
+    --cp-base: #1e1e2e;         /* Base */
+    --cp-crust: #11111b;        /* Crust */
+    --cp-mantle: #181825;       /* Mantle */
+
+    /* Latte colors - more vivid */
+    --bg-rosewater: #dc8a78;   /* Rosewater */
+    --bg-flamingo: #dd7878;    /* Flamingo */
+    --bg-pink: #ea76cb;        /* Pink */
+    --bg-mauve: #8839ef;       /* Mauve */
+    --bg-red: #d20f39;         /* Red */
+    --bg-maroon: #e64553;      /* Maroon */
+    --bg-peach: #fe640b;       /* Peach */
+    --bg-yellow: #df8e1d;      /* Yellow */
+    --bg-green: #40a02b;       /* Green */
+    --bg-teal: #179299;        /* Teal */
+    --bg-sky: #04a5e5;         /* Sky */
+    --bg-sapphire: #209fb5;    /* Sapphire */
+    --bg-blue: #1e66f5;        /* Blue */
+    --bg-lavender: #7287fd;    /* Lavender */
+}

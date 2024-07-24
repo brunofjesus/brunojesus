@@ -1,0 +1,166 @@
+:root {
+    --main-width: 1024px; /* overrides default of 780px */
+}
+
+/* Social Icons in Header */
+.header-menu {
+  justify-content: space-between;
+}
+.social-icons {
+  padding: unset;
+  margin-bottom: unset;
+  margin-top: 1rem;
+}
+
+/* Timeline */
+.timeline {
+    border-left: 3px solid var(--cp-magenta);
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    position: relative;
+    padding-left: 33px;
+    margin-left: 250px;
+}
+
+.timeline .item {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.timeline .item .work-place {
+    font-weight: 600;
+}
+
+.timeline .item .job-meta {
+    position: absolute;
+    left: -280px;
+    top: 15px;
+}
+.timeline .item .job-meta .title {
+    color: var(--content-primary);
+}
+.timeline .item .job-meta .time {
+    color: var(--content-secondary);
+    font-size: 14pt;
+}
+.timeline .item .job-desc {
+    color: var(--content-secondary);
+    font-size: 14pt;
+}
+.timeline .item:last-child {
+    padding-bottom: 0;
+}
+.timeline .item:before {
+    content: "";
+    position: absolute;
+    left: -45px;
+    top: 15px;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background: var(--cp-bg);
+    border: 3px solid var(--cp-magenta);
+}
+
+
+@media (max-width: 768px) {
+    .timeline {
+        margin-left: 0;
+        padding-right: 0;
+    }
+
+    .timeline .item .job-meta {
+        position: static;
+        margin-bottom: 15px;
+    }
+}
+
+/* Skills */
+.skills {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.skills .skill {
+    grid-column: span 1;
+}
+
+.skills .skill .language {
+    font-weight: 600;
+}
+
+.skills .skill p {
+    font-size: 14pt;
+}
+
+.frameworks {
+    text-align: center;
+}
+
+.frameworks .title {
+    font-size: 16pt;
+    margin-bottom: 10px;
+}
+
+.frameworks .framework {
+    font-size: 12pt;
+}
+
+@media (max-width: 768px) {
+    .skills {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Marker */
+.text-marker-flamingo {
+	background-color: var(--bg-flamingo) !important;
+  color: var(--cp-bg) !important;
+	padding: 0 5px 0;
+  font-weight: bold;
+}
+.text-marker-sapphire {
+	background-color: var(--bg-sapphire) !important;
+  color: var(--cp-bg) !important;
+	padding: 0 5px 0;
+}
+.text-marker-peach {
+  background-color: var(--bg-peach) !important;
+  color: var(--cp-bg) !important;
+  padding: 0 5px 0;
+  font-weight: bold;
+}
+.text-marker-mauve {
+  background-color: var(--bg-mauve) !important;
+  color: var(--cp-bg) !important;
+  padding: 0 5px 0;
+  font-weight: bold;
+}
+.text-marker-teal {
+  background-color: var(--bg-teal) !important;
+  color: var(--cp-bg) !important;
+  padding: 0 5px 0;
+  font-weight: bold;
+}
+.text-marker-maroon {
+  background-color: var(--bg-maroon) !important;
+  color: var(--cp-bg) !important;
+  padding: 0 5px 0;
+  font-weight: bold;
+}
+.text-marker-blue {
+  background-color: var(--bg-blue) !important;
+  color: var(--cp-bg) !important;
+  padding: 0 5px 0;
+  font-weight: bold;
+}
