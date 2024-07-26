@@ -14,7 +14,6 @@ tag = 'tags'
 description = "Welcome to my internet corner!"
 
 # Appearance settings
-theme = 'dark'
 colorPalette = 'catpuccin'
 hideHeader = false
 
