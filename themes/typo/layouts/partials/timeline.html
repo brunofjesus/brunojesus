@@ -1,0 +1,9 @@
+<div class="item">
+  <div class="work-place">{{ .place }}</div>
+  <div class="job-meta">
+    <div class="title">{{ .title }}</div>
+    <div class="time">{{ .time }}</div>
+  </div>
+  <div class="job-desc">{{ htmlUnescape .description | safeHTML }}</div>
+ 
+</div>

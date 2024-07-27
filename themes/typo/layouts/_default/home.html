@@ -18,6 +18,17 @@
 
 {{/* Collection Section */}}
 
+{{ if .Site.Params.experience }}
+<h1>Work Experience</h1>
+  {{ with .Site.Params.experience }}
+  <div class="timeline">
+  {{- range . }}
+    {{ partial "timeline.html" . }}
+  {{- end }}
+  </div>
+  {{ end }}
+{{ end }}
+
 {{ if .Site.Params.skill }}
 <h1>Skills</h1>
   {{ with .Site.Params.skill }}

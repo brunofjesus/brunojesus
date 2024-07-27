@@ -80,6 +80,76 @@ name = "Kubernetes"
 description = "Working with since I started at Cloudmobility and now on Commercetools as well."
 
 
+[[params.experience]]
+place = "Commercetools"
+title = "Software Developer"
+time = "2022-01 / Present"
+description = """
+Development of <a href="https://commercetools.com/features/frontend" class="text-marker-mauve">Commercetools Frontend</a>
+"""
+[[params.experience]]
+place = "Escola Superior de Gestão e Tecnologia de Santarém"
+title = "Invited Assistant"
+time = "2021-10 / 2024-07"
+description = """
+Teaching of Relational Databases, Systems Integration and Software Engineering on CTeSP courses.
+"""
+
+[[params.experience]]
+place = "Mercedes-Benz.io @ Cloudmobility"
+title = "Software Engineer"
+time = "2021-08 / 2022-02"
+description = """
+Development of cNS (Cloudmobility Namespaces), a private cloud for Daimler.
+"""
+
+[[params.experience]]
+place = "Volkswagen Digital Solutions @ MAN Digital Hub"
+title = "Software Engineer"
+time = "2020-03 / 2021-08"
+description = """
+Development of a Manufacturing Execution System for MAN Truck & Bus.
+"""
+
+[[params.experience]]
+place = "Alter Solutions @ AXA Belgium"
+title = "Software Developer"
+time = "2019-06 / 2020-03"
+description = """
+Development of <a href="https://www.axa.be/myaxaaccidentatwork" class="text-marker-teal">MyAXA Accident@Work</a>.
+"""
+
+[[params.experience]]
+place = "Maxdata"
+title = "Software Developer"
+time = "2017/06 - 2019/06"
+description = """
+Development of <a href="https://www.maxdata.pt/" class="text-marker-blue">Clinidata</a> healthcare software.
+"""
+
+[[params.experience]]
+place = "Redislogar"
+title = "Freelancer Developer"
+time = "2016/02 - 2016/04"
+description = """
+Configuration of a custom Linux distribution, system security and development of an update system for their HomePaq machines.
+"""
+
+[[params.experience]]
+place = "ConnectedTI"
+title = "Intern"
+time = "2014-06 / 2014-08"
+description = """
+Internship for my specialization Course, development of a CRM for a Call Center.
+"""
+
+[[params.experience]]
+place = "Wolfd"
+title = "Developer"
+time = "2012-06 / 2013-09"
+description = """
+Most of my time in this company was occupied by the development of Rediskey which turned out to be my first \"big\" project.
+"""
 
 # Syntax highligth on code blocks
 [markup]
