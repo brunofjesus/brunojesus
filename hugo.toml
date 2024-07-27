@@ -18,12 +18,16 @@ colorPalette = 'catpuccin'
 hideHeader = false
 
 # Intro on main page, content is markdown
-#homeIntroTitle = 'Hi!'
-#homeIntroContent = """
-#My name is Bruno Jesus, and I am a software developer currently working for Commercetools.
-#
-#I hope some of my notes have been useful to you. If you have any suggestions or would like to collaborate, please feel free to contact me.
-#"""
+homeIntroTitle = 'Hi!'
+homeIntroContent = """
+<p>
+  My name is <b>Bruno Jesus</b>, and I am a software developer currently working for <a href="https://commercetools.com" class="text-marker-mauve">Commercetools</a>.
+</p>
+<p>
+  I hope some of my <a href="/posts" class="text-marker-peach">posts</a> have been useful to you.
+  If you have any suggestions or would like to collaborate, please feel free to <a href="mailto:bruno.fl.jesus@gmail.com" class="text-marker-blue">contact me</a>.
+</p>
+"""
 
 # Collection to display on home
 homeCollectionTitle = 'Posts'
