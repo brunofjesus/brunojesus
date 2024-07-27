@@ -55,6 +55,32 @@ url = "/"
 name = "posts"
 url = "/posts"
 
+[[params.skill]]
+name = "Golang"
+description = "Best language ever! Simple and efficient!"
+
+[[params.skill]]
+name = "Java"
+description = "Was part of my day to day life from 2017 to 2022."
+
+[[params.skill]]
+name = "TypeScript"
+description = "I'd rather not use it, but it's still better than plain old Javascript."
+
+[[params.skill]]
+name = "PHP"
+description = "Using it at Commercetools. Gets the job done."
+
+[[params.skill]]
+name = "Python"
+description = "Used it a lot in the past, but I now use it only occasionally."
+
+[[params.skill]]
+name = "Kubernetes"
+description = "Working with since I started at Cloudmobility and now on Commercetools as well."
+
+
+
 # Syntax highligth on code blocks
 [markup]
 [markup.highlight]

@@ -18,6 +18,17 @@
 
 {{/* Collection Section */}}
 
+{{ if .Site.Params.skill }}
+<h1>Skills</h1>
+  {{ with .Site.Params.skill }}
+  <div class="skills">
+    {{- range . }}
+      {{ partial "skills.html" . }}
+    {{- end }}
+  </div>
+  {{ end }}
+{{ end }}
+
 {{ if .Site.Params.homeCollection }}
 
 <div class="list-container">
