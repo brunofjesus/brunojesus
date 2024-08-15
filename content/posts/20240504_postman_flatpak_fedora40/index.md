@@ -1,6 +1,6 @@
 ---
 title: "Fix Postman Flatpak not opening after login"
-date: "2023-09-05"
+date: "2024-05-04"
 summary: "Make Postman run on Fedora 40"
 description: "Make Postman run on Fedora 40"
 toc: true
