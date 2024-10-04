@@ -32,7 +32,7 @@ The NVMe memory does not work well with some older firmware, I needed to get the
 install macOS. You can get that firmware [here](https://s3.ap-northeast-2.amazonaws.com/global.semi.static/SAMSUNG_SSD_970EVO_Plus_ISO_190513/7ES357322A6707A720E1A71EF11A3BE1EED819E011D317626415F0281A78151C/Samsung_SSD_970_EVO_Plus_2B2QEXM7.iso),
 or [here](https://www.tonymacx86.com/attachments/samsung_ssd_970_evo_plus_2b2qexm7-iso.407927/).
 
-EFI folder with required drivers and kernel extensions. You can get it [here](/site/article_files/20200320_myhackintosh/efi.zip).
+EFI folder with required drivers and kernel extensions. You can get it [here](efi.zip).
 
 Access to a device running macOS. If you don't have on you can install it in a virtual machine using Linux.
 More information [here](https://github.com/foxlet/macOS-Simple-KVM).
