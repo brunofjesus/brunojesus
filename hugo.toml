@@ -2,9 +2,10 @@ baseURL = 'https://brunojesus.pt/'
 languageCode = 'en-us'
 title = 'Bruno Jesus'
 theme = 'typo'
+disableKinds = ["taxonomy", "term", "taxonomyTerm"]
 
-[taxonomies]
-tag = 'tags'
+#[taxonomies]
+#tag = 'tags'
 
 # Google analytics code
 #googleAnalytics = "G-xxxxxxxxx"
