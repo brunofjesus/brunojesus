@@ -24,15 +24,11 @@ homeIntroContent = """
 <p>
   My name is <b>Bruno Jesus</b>, and I am a software developer currently working for <a href="https://commercetools.com" class="text-marker-mauve">Commercetools</a>.
 </p>
+<p>Feel free to <a class="text-marker-teal" href="/cv.pdf">download my CV</a>, I left some stuff out for the sake of simplicity... and I really wanted it to fit nicely in one A4 page!</p>
 <p>
-  I hope some of my <a href="/posts" class="text-marker-peach">posts</a> have been useful to you.
   If you have any suggestions or would like to collaborate, please feel free to <a href="mailto:bruno.fl.jesus@gmail.com" class="text-marker-blue">contact me</a>.
 </p>
 """
-
-# Collection to display on home
-homeCollectionTitle = 'Posts'
-homeCollection = 'posts'
 
 # Lists parameters
 paginationSize = 100
@@ -51,46 +47,54 @@ url = "https://www.linkedin.com/in/bruno-jesus-0ab943a9/"
 name = "github"
 url = "https://github.com/brunofjesus"
 
+[[params.social]]
+name = "cv"
+url = "/cv.pdf"
+
 # Main menu pages
 [[params.menu]]
 name = "home"
 url = "/"
 
-[[params.menu]]
-name = "posts"
-url = "/posts"
-
 [[params.skill]]
 name = "Golang"
-description = "Best language ever! Simple and efficient!"
+emoji = "❤️"
+description = "Fell in love with it's ease of use, performance, and did I say it compiles to a single binary?"
 
 [[params.skill]]
 name = "Java"
-description = "Was part of my day to day life from 2017 to 2022."
-
-[[params.skill]]
-name = "TypeScript"
-description = "I'd rather not use it, but it's still better than plain old Javascript."
+emoji = "👌"
+description = "Was part of my day to day life from 2017 to 2022. After that I mainly used it for teaching."
 
 [[params.skill]]
 name = "PHP"
-description = "Using it at Commercetools. Gets the job done."
+emoji = "🤷"
+description = "Some systems at my current job use it, that means I have to use it as well."
+
+[[params.skill]]
+name = "TypeScript"
+emoji = "😐"
+description = "Makes JavaScript bearable and gets the job done."
 
 [[params.skill]]
 name = "Python"
-description = "Used it a lot in the past, but I now use it only occasionally."
+emoji = "🤓"
+description = "I don't really use it much nowadays."
 
 [[params.skill]]
 name = "Kubernetes"
-description = "Working with since I started at Cloudmobility and now on Commercetools as well."
+emoji = "😇"
+description = "I guess I like it because I don't really have to maintain it!"
 
 
 [[params.experience]]
 place = "Commercetools"
-title = "Software Developer"
+title = "Senior Software Engineer"
 time = "2022-01 / Present"
 description = """
-Development of <a href="https://commercetools.com/features/frontend" class="text-marker-mauve">Commercetools Frontend</a>
+Development of <a href="https://commercetools.com/features/frontend" class="text-marker-mauve">Commercetools Frontend</a>.
+<br/>
+Spearheaded the transition to multi-tenancy with Kubernetes and Telemetry/Observability design and implementation.
 """
 [[params.experience]]
 place = "Escola Superior de Gestão e Tecnologia de Santarém"
@@ -102,7 +106,7 @@ Teaching of Relational Databases, Systems Integration and Software Engineering o
 
 [[params.experience]]
 place = "Mercedes-Benz.io @ Cloudmobility"
-title = "Software Engineer"
+title = "Senior Software Engineer"
 time = "2021-08 / 2022-02"
 description = """
 Development of cNS (Cloudmobility Namespaces), a private cloud for Daimler.
@@ -118,7 +122,7 @@ Development of a Manufacturing Execution System for MAN Truck & Bus.
 
 [[params.experience]]
 place = "Alter Solutions @ AXA Belgium"
-title = "Software Developer"
+title = "Software Engineer"
 time = "2019-06 / 2020-03"
 description = """
 Development of <a href="https://www.axa.be/myaxaaccidentatwork" class="text-marker-teal">MyAXA Accident@Work</a>.
@@ -126,7 +130,7 @@ Development of <a href="https://www.axa.be/myaxaaccidentatwork" class="text-mark
 
 [[params.experience]]
 place = "Maxdata"
-title = "Software Developer"
+title = "Software Engineer"
 time = "2017/06 - 2019/06"
 description = """
 Development of <a href="https://www.maxdata.pt/" class="text-marker-blue">Clinidata</a> healthcare software.
@@ -150,7 +154,7 @@ Internship for my specialization Course, development of a CRM for a Call Center.
 
 [[params.experience]]
 place = "Wolfd"
-title = "Developer"
+title = "Junior Developer"
 time = "2012-06 / 2013-09"
 description = """
 Most of my time in this company was occupied by the development of Rediskey which turned out to be my first \"big\" project.

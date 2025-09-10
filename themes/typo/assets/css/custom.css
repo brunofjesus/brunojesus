@@ -88,19 +88,22 @@
 .skills {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 40px;
 }
 
 .skills .skill {
     grid-column: span 1;
+    text-align: center;
 }
 
 .skills .skill .language {
     font-weight: 600;
+    text-align: center;
 }
 
 .skills .skill p {
     font-size: 14pt;
+    text-align: justify;
 }
 
 .frameworks {
