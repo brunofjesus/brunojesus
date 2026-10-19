@@ -1,8 +1,8 @@
 Hi, I'm Bruno Jesus!
 
-I'm a software developer from Portugal. I've been writing code professionally
-since 2012, mostly in Go these days, and I currently work at
-[commercetools](https://commercetools.com).
+I'm a software developer from Portugal, currently working at
+[commercetools](https://commercetools.com) mostly in Go. You can find more
+about my work history on my [CV](/cv).
 
 I still love Linux, open source, and small software that does one thing well.
 I'm not a fan of bloat, which is probably why this site looks the way it does.
