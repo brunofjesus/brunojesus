@@ -72,6 +72,20 @@
 	}
 }
 
+/* Buttons */
+.button-container {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.button-container a {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+}
+
 /* Skills */
 .skills {
 	display: grid;
@@ -87,6 +101,14 @@
 .skills .skill .language {
 	font-weight: bold;
 	margin-bottom: 4px;
+}
+
+.skills .skill .language img {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	margin-right: 6px;
+	filter: brightness(0) invert(1);
 }
 
 .skills .skill p {
@@ -232,27 +254,27 @@ Here's a rough timeline of the places I've worked and the things I've done.
 
 <div class="skills">
   <div class="skill">
-    <div class="language">Go ❤️</div>
+    <div class="language"><img src="assets/svg/go.svg" alt="Go">Go</div>
     <p>Fell in love with its ease of use, performance, and did I say it compiles to a single binary?</p>
   </div>
   <div class="skill">
-    <div class="language">Java 👌</div>
+    <div class="language"><img src="assets/svg/java.svg" alt="Java">Java</div>
     <p>Was part of my day to day life from 2017 to 2022. After that I mainly used it for teaching.</p>
   </div>
   <div class="skill">
-    <div class="language">PHP 🤷</div>
+    <div class="language"><img src="assets/svg/php.svg" alt="PHP">PHP</div>
     <p>Some systems at my current job use it, that means I have to use it as well.</p>
   </div>
   <div class="skill">
-    <div class="language">TypeScript 😐</div>
+    <div class="language"><img src="assets/svg/typescript.svg" alt="TypeScript">TypeScript</div>
     <p>Makes JavaScript bearable and gets the job done.</p>
   </div>
   <div class="skill">
-    <div class="language">Python 🤓</div>
+    <div class="language"><img src="assets/svg/python.svg" alt="Python">Python</div>
     <p>I don't really use it much nowadays.</p>
   </div>
   <div class="skill">
-    <div class="language">Kubernetes 😇</div>
+    <div class="language"><img src="assets/svg/kubernetes.svg" alt="Kubernetes">Kubernetes</div>
     <p>I guess I like it because I don't really have to maintain it!</p>
   </div>
 </div>
