@@ -22,7 +22,7 @@ var defaultSettings Settings = Settings{
 	HeaderLinks: []link{
 		{"Home", "/"},
 		{"Blog", "/blog"},
-		{"About", "/about"},
+		{"CV", "/cv"},
 		{"Links", "/links"},
 	},
 }

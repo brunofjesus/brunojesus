@@ -1,4 +1,121 @@
-# About
+<style>
+/* Timeline */
+.timeline {
+	margin-top: 20px;
+	padding-left: 24px;
+	border-left: 2px solid #cda869;
+}
+
+.timeline .item {
+	position: relative;
+	display: grid;
+	grid-template-columns: 11em 1fr;
+	grid-template-areas:
+		"meta place"
+		"meta desc";
+	column-gap: 24px;
+	padding-bottom: 24px;
+}
+
+.timeline .item:last-child {
+	padding-bottom: 0;
+}
+
+.timeline .item:before {
+	content: "";
+	position: absolute;
+	top: 4px;
+	left: -31px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #1e1e1e;
+	border: 2px solid #cda869;
+}
+
+.timeline .work-place {
+	grid-area: place;
+	font-weight: bold;
+}
+
+.timeline .job-meta {
+	grid-area: meta;
+	text-align: right;
+}
+
+.timeline .job-meta .time {
+	color: #7e7e7e;
+	font-size: 11pt;
+}
+
+.timeline .job-desc {
+	grid-area: desc;
+	color: #cfcfcf;
+}
+
+.timeline .job-desc p {
+	margin: 4px 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+	.timeline .item {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"meta"
+			"place"
+			"desc";
+	}
+
+	.timeline .job-meta {
+		text-align: left;
+		margin-bottom: 4px;
+	}
+}
+
+/* Skills */
+.skills {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin-top: 20px;
+}
+
+.skills .skill {
+	text-align: center;
+}
+
+.skills .skill .language {
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.skills .skill p {
+	color: #cfcfcf;
+	font-size: 11pt;
+}
+</style>
+
+# Curriculum Vitae
+<div class="button-container">
+  <a href="assets/cv.pdf" download class="cv">
+    <img src="assets/svg/file.svg" alt="LinkedIn"
+      style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
+    Download CV
+  </a>
+
+  <a href="https://github.com/brunofjesus" class="github" target="_blank">
+    <img src="assets/svg/github.svg" alt="LinkedIn"
+      style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
+    GitHub
+  </a>
+
+  <a href="https://www.linkedin.com/in/bruno-jesus-0ab943a9" class="linkedin" target="_blank">
+    <img src="assets/svg/linkedin.svg" alt="LinkedIn"
+      style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
+    LinkedIn
+  </a>
+</div>
+
 
 I'm Bruno Jesus, a software developer from Portugal. I've been writing software
 professionally since 2012, and these days I mostly write Go and spend my time
@@ -26,9 +143,10 @@ Here's a rough timeline of the places I've worked and the things I've done.
     <div class="job-meta">
       <div class="title">Invited Assistant</div>
       <div class="time">2021-10 / 2024-07</div>
+      <div class="time">2026-03 / Present</div>
     </div>
     <div class="job-desc">
-      <p>Taught relational databases, systems integration, and software engineering on CTeSP courses.</p>
+      <p><b>Taught Courses:</b> Relational Databases, Software Engineering, Systems Integration, Digital Systems, and Operating Systems.</p>
     </div>
   </div>
 
