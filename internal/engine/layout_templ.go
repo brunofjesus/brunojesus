@@ -8,7 +8,7 @@ package engine
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func layout(title string) templ.Component {
+func layout(s Settings, title string, content string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -42,7 +42,62 @@ func layout(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " | Bruno Jesus</title></head><body><div id=\"wrapper\"><header id=\"header\"><h1>Bruno Jesus</h1><p>Yet another boring minimalist developer</p><nav class=\"navigation\" aria-label=\"Main navigation\"><ul><li><a href=\"/index.php/aboutme\" aria-current=\"page\">About Me</a></li><li><a href=\"/index.php/blog\">Blog</a></li><li><a href=\"/index.php/contact\">Contact</a></li><li><a href=\"/index.php/links\">Links</a></li></ul></nav></header><main id=\"content\"><p>My name is Bruno Jesus (strang3quark). I'm a student currently taking a degree in IT. I'm Portuguese, so English isn't my primary language. If there are any typos or anything you don't understand, please email me.</p><p>I love Linux and the open-source philosophy, and I'm willing to contribute to some projects as soon as I have time.</p><p>I'm a fan of minimalism and non-bloated software, which is why this site is so minimal.</p><p>One of the things I like most is programming. You can check my GitHub profile and find this website's code <a href=\"https://github.com/strang3quark/strang3quark-website\">here</a>.</p><p>That's all. I hope you enjoy the blog. If you have any article suggestions, feel free to contact me.</p></main><footer id=\"footer\"><nav class=\"navigation\" aria-label=\"Footer navigation\"><ul><li><a href=\"https://example.com/\">Portfolio/CV</a></li><li><a href=\"https://github.com/strang3quark/strang3quark-website\">Source Code</a></li><li><a href=\"https://github.com/strang3quark\">GitHub</a></li></ul></nav></footer></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " | ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(s.SiteName)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/engine/layout.templ`, Line: 13, Col: 35}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</title></head><body><div id=\"wrapper\"><header id=\"header\"><h1>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(s.SiteName)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/engine/layout.templ`, Line: 18, Col: 26}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</h1><p>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(s.SubTitle)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/engine/layout.templ`, Line: 19, Col: 25}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</p>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = header(s.HeaderLinks).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</header><main id=\"content\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templ.Raw(content).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</main><footer id=\"footer\"><nav class=\"navigation\" aria-label=\"Footer navigation\"><ul><li><a href=\"https://example.com/\">Portfolio/CV</a></li><li><a href=\"https://github.com/strang3quark/strang3quark-website\">Source Code</a></li><li><a href=\"https://github.com/strang3quark\">GitHub</a></li></ul></nav></footer></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

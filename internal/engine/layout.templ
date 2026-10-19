@@ -1,6 +1,6 @@
 package engine
 
-templ layout(title string) {
+templ layout(s Settings, title string, content string) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,48 +10,19 @@ templ layout(title string) {
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <title>{ title } | Bruno Jesus</title>
+    <title>{ title } | { s.SiteName }</title>
 </head>
 <body>
     <div id="wrapper">
         <header id="header">
-            <h1>Bruno Jesus</h1>
-            <p>Yet another boring minimalist developer</p>
+          <h1>{ s.SiteName }</h1>
+          <p>{ s.SubTitle }</p>
 
-            <nav class="navigation" aria-label="Main navigation">
-                <ul>
-                    <li>
-                        <a href="/index.php/aboutme"
-                           aria-current="page">About Me</a>
-                    </li>
-                    <li><a href="/index.php/blog">Blog</a></li>
-                    <li><a href="/index.php/contact">Contact</a></li>
-                    <li><a href="/index.php/links">Links</a></li>
-                </ul>
-            </nav>
+          @header(s.HeaderLinks)
         </header>
 
         <main id="content">
-            <p>My name is Bruno Jesus (strang3quark). I'm a student
-            currently taking a degree in IT. I'm Portuguese, so English
-            isn't my primary language. If there are any typos or anything
-            you don't understand, please email me.</p>
-
-            <p>I love Linux and the open-source philosophy, and I'm
-            willing to contribute to some projects as soon as I have time.</p>
-
-            <p>I'm a fan of minimalism and non-bloated software, which is
-            why this site is so minimal.</p>
-
-            <p>One of the things I like most is programming. You can
-            check my GitHub profile and find this website's code
-            <a href="https://github.com/strang3quark/strang3quark-website">
-                here
-            </a>.
-            </p>
-
-            <p>That's all. I hope you enjoy the blog. If you have any
-            article suggestions, feel free to contact me.</p>
+            @templ.Raw(content)
         </main>
 
         <footer id="footer">

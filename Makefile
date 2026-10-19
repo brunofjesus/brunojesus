@@ -4,8 +4,8 @@ BIN     := $(TMP_DIR)/main
 .PHONY: dev generate build run fmt tidy test clean
 
 ## dev: run with live reload (regenerates templ, rebuilds and restarts on change)
-dev: generate
-	go tool air
+dev:
+	go tool wgo -file .templ -xfile _templ.go go tool templ generate :: go tool wgo run -file .templ .
 
 ## generate: regenerate Go code from .templ files
 generate:
