@@ -1,6 +1,6 @@
 ---
 Title: Posts are Back!
-Date: Sun, 01 Nov 2026 20:00:00 +0100
+Date: Tue, 20 Oct 2026 20:25:00 +0100
 ---
 
 Before having `brunojesus.pt`, there was `strang3quark.tk` (and also
@@ -12,7 +12,7 @@ After finishing my studies, I abandoned `strang3quark.tk`. Later I created
 `brunojesus.pt`, and since I wanted it to be a bit more professional, I
 ended up discarding the old site and its contents.
 
-![Screenshot: strang3quark.tk V1](/assets/media/20261101_posts_are_back/v1.png)
+![Screenshot: strang3quark.tk V1](/assets/media/20261020_posts_are_back/v1.png)
 <small>Image: strang3quark.tk V1</small>
 
 Since I usually have nothing interesting to post about, I ended up removing
