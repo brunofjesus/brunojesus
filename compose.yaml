@@ -1,0 +1,8 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped 
+    ports:
+      - "8042:8042"

@@ -1,0 +1,11 @@
+package layout
+
+templ header(items []Link) {
+	<nav class="navigation" aria-label="Main navigation">
+		<ul>
+      for _, item := range items {
+        <li><a href={ item.Href }>{ item.Name }</a></li>
+      }
+    </ul>
+  </nav>
+}

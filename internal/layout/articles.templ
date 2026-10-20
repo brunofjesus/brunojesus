@@ -1,0 +1,25 @@
+package layout
+
+import "time"
+import "slices"
+
+
+type PageMetadata struct {
+	Title    string     `json:"title"`
+	Date     *time.Time `json:"date"`
+	FileName string     `json:"fileName"`
+}
+
+templ Articles(articles []PageMetadata) {
+<h1><a href="#">Articles</a> — (<a href="/rss.xml">RSS Feed</a>)</h1>
+<ul class="article-list">
+  for _, article := range slices.Backward(articles) {
+    <li class="article-item">
+      <a href={ article.FileName }>
+        <span class="article-date">{ article.Date.Format("2006.01.02") }</span>
+        <span class="article-title">{ article.Title }</span>
+      </a>
+    </li>
+  }
+</ul>
+}
