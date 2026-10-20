@@ -1,9 +1,12 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
+	"io/fs"
 	"log"
+	"log/slog"
 	"net/http"
 	"path/filepath"
 
@@ -14,15 +17,22 @@ func servePage() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		name := r.PathValue("page")
 		if len(name) == 0 {
-			name = "index"
+			name = "index.html"
+		} else if filepath.Ext(name) == "" {
+			name = name + ".html"
 		}
-		name = name + ".html"
 
 		path := filepath.Join("gen", name)
 		f, err := static.Gen.ReadFile(path)
-		if err != nil {
+		if err != nil && errors.Is(err, fs.ErrNotExist) {
+			w.WriteHeader(http.StatusNotFound)
+			_, _ = w.Write([]byte("404 page not found"))
+			slog.Warn("Page not found", "path", path)
+			return
+		} else if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			_, _ = w.Write([]byte(err.Error()))
+			_, _ = w.Write([]byte("Unexpected error"))
+			slog.Error("Unexpected error reading file", "path", path, "error", err)
 			return
 		}
 

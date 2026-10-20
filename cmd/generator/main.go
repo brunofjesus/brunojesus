@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/a-h/templ"
 	chromahtml "github.com/alecthomas/chroma/v3/formatters/html"
 	"github.com/alecthomas/chroma/v3/styles"
 	"github.com/brunofjesus/brunojesus/internal/layout"
@@ -81,6 +82,7 @@ func main() {
 type markdownFile struct {
 	sourcePath   string // e.g. data/articles/foo.md
 	relativePath string // e.g. articles/foo.md
+	slug         string // e.g. articles/foo
 	outputDir    string // e.g. gen/articles
 	outputPath   string // e.g. gen/articles/foo.html
 	isArticle    bool
@@ -98,6 +100,7 @@ func newMarkdownFile(path string) (markdownFile, error) {
 	return markdownFile{
 		sourcePath:   path,
 		relativePath: relativePath,
+		slug:         strings.TrimSuffix(relativePath, ".md"),
 		outputDir:    filepath.Join("gen", relativeDir),
 		outputPath:   filepath.Join("gen", relativeDir, htmlFileName),
 		isArticle:    relativeDir == "articles",
@@ -106,6 +109,7 @@ func newMarkdownFile(path string) (markdownFile, error) {
 
 func renderPages() error {
 	var metadataList []layout.PageMetadata
+	var rssItems []templ.Component
 
 	err := filepath.WalkDir("data", func(path string, d fs.DirEntry, _ error) error {
 		if d.IsDir() || !strings.HasSuffix(path, ".md") {
@@ -117,12 +121,15 @@ func renderPages() error {
 			return err
 		}
 
-		metadata, err := renderMarkdownFile(mf)
+		metadata, rssItem, err := renderMarkdownFile(mf)
 		if err != nil {
 			return err
 		}
 		if metadata != nil {
 			metadataList = append(metadataList, *metadata)
+		}
+		if rssItem != nil {
+			rssItems = append(rssItems, rssItem)
 		}
 
 		return nil
@@ -131,13 +138,21 @@ func renderPages() error {
 		return fmt.Errorf("error walking through data directory: %w", err)
 	}
 
-	return renderArticlePage(metadataList)
+	if err := renderArticlePage(metadataList); err != nil {
+		return fmt.Errorf("error rendering articles page: %w", err)
+	}
+
+	if err := renderRSSFeed(rssItems); err != nil {
+		return fmt.Errorf("error rendering RSS feed: %w", err)
+	}
+
+	return nil
 }
 
-func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, error) {
+func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, templ.Component, error) {
 	source, err := os.ReadFile(mf.sourcePath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read file %s: %w", mf.sourcePath, err)
+		return nil, nil, fmt.Errorf("failed to read file %s: %w", mf.sourcePath, err)
 	}
 
 	doc := markdownParser.Parse(source)
@@ -146,22 +161,22 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, error) {
 	if mf.isArticle {
 		metadata, err = metadataFromDocument(doc, mf.relativePath)
 		if err != nil {
-			return nil, err
+			return nil, nil, err
 		}
 	}
 
 	if err := os.MkdirAll(mf.outputDir, os.ModePerm); err != nil {
-		return nil, fmt.Errorf("failed to create output directory: %w", err)
+		return nil, nil, fmt.Errorf("failed to create output directory: %w", err)
 	}
 
 	var buf bytes.Buffer
 	if err := htmlRenderer.Render(&buf, source, doc); err != nil {
-		return nil, fmt.Errorf("failed to render HTML for file %s: %w", mf.sourcePath, err)
+		return nil, nil, fmt.Errorf("failed to render HTML for file %s: %w", mf.sourcePath, err)
 	}
 
 	f, err := os.Create(mf.outputPath)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create HTML file for %s: %w", mf.sourcePath, err)
+		return nil, nil, fmt.Errorf("failed to create HTML file for %s: %w", mf.sourcePath, err)
 	}
 	defer f.Close()
 
@@ -170,13 +185,18 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, error) {
 		layout.Page(metadata.Title, buf.String(), metadata.Date),
 	).Render(context.Background(), f)
 	if err != nil {
-		return nil, fmt.Errorf("failed to render layout for file %s: %w", mf.sourcePath, err)
+		return nil, nil, fmt.Errorf("failed to render layout for file %s: %w", mf.sourcePath, err)
 	}
 
 	if !mf.isArticle {
-		return nil, nil
+		return nil, nil, nil
 	}
-	return &metadata, nil
+
+	rssItem := layout.RSSItem(
+		metadata.Title, mf.slug, buf.String(), *metadata.Date,
+	)
+
+	return &metadata, rssItem, nil
 }
 
 func renderArticlePage(metadata []layout.PageMetadata) error {
@@ -192,6 +212,21 @@ func renderArticlePage(metadata []layout.PageMetadata) error {
 	).Render(context.Background(), f)
 	if err != nil {
 		return fmt.Errorf("failed to render articles.html: %w", err)
+	}
+
+	return nil
+}
+
+func renderRSSFeed(rssItems []templ.Component) error {
+	f, err := os.Create("gen/rss.xml")
+	if err != nil {
+		return fmt.Errorf("failed to create rss.xml: %w", err)
+	}
+	defer f.Close()
+
+	err = layout.RSSFeed(layoutSettings, rssItems).Render(context.Background(), f)
+	if err != nil {
+		return fmt.Errorf("failed to render rss.xml: %w", err)
 	}
 
 	return nil
