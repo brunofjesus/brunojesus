@@ -1,10 +1,5 @@
 package layout
 
-import (
-	"github.com/a-h/templ"
-	"github.com/brunofjesus/brunojesus/internal/pages"
-)
-
 type Settings struct {
 	SiteName    string
 	SubTitle    string
@@ -14,8 +9,4 @@ type Settings struct {
 type Link struct {
 	Name string
 	Href string
-}
-
-func Render(settings Settings, page pages.Page) templ.Component {
-	return layout(settings, page.Title, page.Content)
 }

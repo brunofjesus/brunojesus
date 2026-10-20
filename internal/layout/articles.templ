@@ -1,14 +1,20 @@
 package layout
 
-import "github.com/brunofjesus/brunojesus/internal/pages"
-import "fmt"
+import "time"
+import "slices"
 
 
-templ Articles(articles []pages.PageMetadata) {
+type PageMetadata struct {
+	Title    string     `json:"title"`
+	Date     *time.Time `json:"date"`
+	FileName string     `json:"fileName"`
+}
+
+templ Articles(articles []PageMetadata) {
 <h1><a href="#">Articles</a> — (<a href="/feed">RSS Feed</a>)</h1>
 <ul>
-  for _, article := range articles {
-    <li>{ article.Date.Format("2006.01.02") } - <a href={ fmt.Sprintf("/articles/%s", article.FileName) }>{ article.Title }</a></li>
+  for _, article := range slices.Backward(articles) {
+    <li>{ article.Date.Format("2006.01.02") } - <a href={ article.FileName }>{ article.Title }</a></li>
   }
 </ul>
 }

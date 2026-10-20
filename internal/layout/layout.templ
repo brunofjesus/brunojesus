@@ -1,45 +1,30 @@
 package layout
 
-templ layout(s Settings, title string, content string) {
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/style.css">
-
-    <title>{ title } | { s.SiteName }</title>
-</head>
-<body>
-    <div id="wrapper">
-        <header id="header">
-          <h1>{ s.SiteName }</h1>
-          <p>{ s.SubTitle }</p>
-
-          @header(s.HeaderLinks)
-        </header>
-
-        <main id="content">
-            @templ.Raw(content)
-        </main>
-
-        <footer id="footer">
-            <nav class="navigation" aria-label="Footer navigation">
-                <ul>
-                    <li><a href="https://example.com/">Portfolio/CV</a></li>
-                    <li>
-                        <a href="https://github.com/strang3quark/strang3quark-website">
-                            Source Code
-                        </a>
-                    </li>
-                    <li><a href="https://github.com/strang3quark">GitHub</a></li>
-                </ul>
-            </nav>
-        </footer>
-    </div>
-</body>
-</html>
-
+templ Layout(s Settings, title, content string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+			<link rel="stylesheet" href="/assets/css/style.css"/>
+			<link rel="stylesheet" href="/assets/css/code-gruvbox.css"/>
+			<title>{ title } | { s.SiteName }</title>
+		</head>
+		<body>
+			<div id="wrapper">
+				<header id="header">
+					<h1>{ s.SiteName }</h1>
+					<p>{ s.SubTitle }</p>
+					@header(s.HeaderLinks)
+				</header>
+				<main id="content">
+					@templ.Raw(content)
+				</main>
+				<footer id="footer">
+					Copyright (c) 2015-2026 Bruno Jesus. Some Rights Reserved.
+				</footer>
+			</div>
+		</body>
+	</html>
 }

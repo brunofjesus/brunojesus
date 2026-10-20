@@ -1,18 +1,22 @@
+//go:generate go tool templ generate
+//go:generate go run cmd/generator/main.go
 package main
 
 import (
-	"bytes"
 	"context"
 	"embed"
 	"log"
 	"net/http"
+	"path/filepath"
 
 	"github.com/brunofjesus/brunojesus/internal/layout"
-	"github.com/brunofjesus/brunojesus/internal/pages"
 )
 
 //go:embed assets/*
-var content embed.FS
+var assets embed.FS
+
+//go:embed gen/*
+var gen embed.FS
 
 var layoutSettings layout.Settings = layout.Settings{
 	SiteName: "Bruno Jesus",
@@ -31,16 +35,17 @@ func servePage() http.HandlerFunc {
 		if len(name) == 0 {
 			name = "home"
 		}
-		name = name + ".md"
+		name = name + ".html"
 
-		page, err := pages.RenderPage(name)
+		path := filepath.Join("gen", name)
+		f, err := gen.ReadFile(path)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			_, _ = w.Write([]byte(err.Error()))
 			return
 		}
 
-		component := layout.Render(layoutSettings, page)
+		component := layout.Layout(layoutSettings, "", string(f))
 		if err := component.Render(context.Background(), w); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			_, _ = w.Write([]byte(err.Error()))
@@ -50,38 +55,7 @@ func servePage() http.HandlerFunc {
 
 func main() {
 	mux := http.NewServeMux()
-
 	mux.HandleFunc("/{page...}", servePage())
-
-	mux.Handle("/assets/", http.FileServer(http.FS(content)))
-
-	mux.HandleFunc("/articles/{$}", func(w http.ResponseWriter, r *http.Request) {
-		articleMetadataList, err := pages.ListArticles()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			_, _ = w.Write([]byte(err.Error()))
-			return
-		}
-
-		articleListComponent := layout.Articles(articleMetadataList)
-
-		var articleList bytes.Buffer
-		if err := articleListComponent.Render(context.Background(), &articleList); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			_, _ = w.Write([]byte(err.Error()))
-			return
-		}
-
-		component := layout.Render(layoutSettings, pages.Page{
-			Title:   "Articles",
-			Content: articleList.String(),
-		})
-
-		if err := component.Render(context.Background(), w); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			_, _ = w.Write([]byte(err.Error()))
-		}
-	})
-
+	mux.Handle("/assets/", http.FileServer(http.FS(assets)))
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }

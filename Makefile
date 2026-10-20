@@ -26,6 +26,7 @@ build:
 
 ## run: run the server once, without watching
 run:
+	go generate
 	go run .
 
 ## fmt: format templ files and Go code

@@ -67,6 +67,11 @@ body {
 	color:#cf6a4c;
 }
 
+#content img {
+	max-width: 100%;
+	height: auto;
+}
+
 #content h1, h2, h3, h4 {
 	padding-top: 20px;
 }
