@@ -43,7 +43,7 @@ func servePage() http.HandlerFunc {
 
 func main() {
 	helpFlag := flag.Bool("help", false, "Show help")
-	listenAddrFlag := flag.String("listen", ":8080", "Address to listen on")
+	listenAddrFlag := flag.String("listen", ":8042", "Address to listen on")
 	flag.Parse()
 
 	if *helpFlag {
