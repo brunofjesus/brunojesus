@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -46,8 +48,20 @@ func servePage() http.HandlerFunc {
 }
 
 func main() {
+	helpFlag := flag.Bool("help", false, "Show help")
+	listenAddrFlag := flag.String("listen", ":8080", "Address to listen on")
+	flag.Parse()
+
+	if *helpFlag {
+		fmt.Println("Usage: server [options]")
+		fmt.Println("Options:")
+		flag.PrintDefaults()
+		return
+	}
+
+	fmt.Printf("Starting server on %s\n", *listenAddrFlag)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{page...}", servePage())
 	mux.Handle("/assets/", http.FileServer(http.FS(static.Assets)))
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(*listenAddrFlag, mux))
 }
