@@ -12,9 +12,14 @@ type PageMetadata struct {
 
 templ Articles(articles []PageMetadata) {
 <h1><a href="#">Articles</a> — (<a href="/feed">RSS Feed</a>)</h1>
-<ul>
+<ul class="article-list">
   for _, article := range slices.Backward(articles) {
-    <li>{ article.Date.Format("2006.01.02") } - <a href={ article.FileName }>{ article.Title }</a></li>
+    <li class="article-item">
+      <a href={ article.FileName }>
+        <span class="article-date">{ article.Date.Format("2006.01.02") }</span>
+        <span class="article-title">{ article.Title }</span>
+      </a>
+    </li>
   }
 </ul>
 }

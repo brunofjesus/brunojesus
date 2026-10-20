@@ -2,22 +2,19 @@ module github.com/brunofjesus/brunojesus
 
 go 1.27.2
 
-tool (
-	github.com/a-h/templ/cmd/templ
-	github.com/bokwoon95/wgo
-)
+tool github.com/a-h/templ/cmd/templ
 
 require (
 	github.com/a-h/templ v0.3.1070
+	github.com/alecthomas/chroma/v3 v3.0.0-alpha.5
+	github.com/yuin/goldmark-highlighting/v3 v3.1.0
 	github.com/yuin/goldmark-meta/v2 v2.0.2
 	github.com/yuin/goldmark/v2 v2.0.0
 )
 
 require (
 	github.com/a-h/parse v0.0.0-20250122154542-74294addb73e // indirect
-	github.com/alecthomas/chroma/v3 v3.0.0-alpha.5 // indirect
 	github.com/andybalholm/brotli v1.2.6 // indirect
-	github.com/bokwoon95/wgo v0.7.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cli/browser v1.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -29,7 +26,6 @@ require (
 	github.com/natefinch/atomic v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
-	github.com/yuin/goldmark-highlighting/v3 v3.1.0 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
 	golang.org/x/mod v0.41.0 // indirect
 	golang.org/x/net v0.59.0 // indirect

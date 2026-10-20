@@ -3,18 +3,6 @@ BIN     := $(TMP_DIR)/main
 
 .PHONY: dev generate build run fmt tidy test clean
 
-## run-watch: run with live reload 
-run-watch:
-	go tool wgo run ./...
-
-## temp-watch: regenerate templ files on change
-templ-watch:
-	go tool templ generate --watch
-
-## dev: run with live reload (regenerates templ, rebuilds and restarts on change)
-dev:
-	make -j2 templ-watch run-watch
-
 ## generate: regenerate Go code from .templ files
 generate:
 	go tool templ generate

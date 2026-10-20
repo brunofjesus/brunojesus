@@ -1,0 +1,281 @@
+/*
+ * Catppuccin Frappe (dark)
+ * https://github.com/catppuccin/catppuccin
+ */
+:root {
+	--fonts: "Droid Sans", "Source Sans Pro", "Lemon", monospace, "Dejavu Sans";
+	--body-font-size: 12pt;
+
+	--ctp-rosewater: #f2d5cf;
+	--ctp-flamingo: #eebebe;
+	--ctp-pink: #f4b8e4;
+	--ctp-mauve: #ca9ee6;
+	--ctp-red: #e78284;
+	--ctp-maroon: #ea999c;
+	--ctp-peach: #ef9f76;
+	--ctp-yellow: #e5c890;
+	--ctp-green: #a6d189;
+	--ctp-teal: #81c8be;
+	--ctp-sky: #99d1db;
+	--ctp-sapphire: #85c1dc;
+	--ctp-blue: #8caaee;
+	--ctp-lavender: #babbf1;
+	--ctp-text: #c6d0f5;
+	--ctp-subtext1: #b5bfe2;
+	--ctp-subtext0: #a5adce;
+	--ctp-overlay2: #949cbb;
+	--ctp-overlay1: #838ba7;
+	--ctp-overlay0: #737994;
+	--ctp-surface2: #626880;
+	--ctp-surface1: #51576d;
+	--ctp-surface0: #414559;
+	--ctp-base: #303446;
+	--ctp-mantle: #292c3c;
+	--ctp-crust: #232634;
+
+	--bg: var(--ctp-base);
+	--bg-alt: var(--ctp-mantle);
+	--text: var(--ctp-text);
+	--subtext: var(--ctp-subtext0);
+	--link: var(--ctp-blue);
+	--accent: var(--ctp-peach);
+	--border: var(--ctp-surface1);
+	--code-bg: var(--ctp-mantle);
+	--code-text: var(--ctp-text);
+	--quote-mark: var(--ctp-overlay1);
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-size: var(--body-font-size);
+	color: var(--text);
+	background-color: var(--bg);
+	font-family: var(--fonts);
+	height: 100%;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#header {
+	width: 100%;
+	background-color: var(--bg);
+	text-align: center;
+}
+
+#header h1 {
+	padding-top: 10px;
+	margin: 0;
+}
+
+.navigation {
+	text-align: center;
+	background-color: var(--bg-alt);
+	font-size: 14px;
+	padding: 5px 0 5px 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.navigation ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.navigation ul li {
+	display: inline;
+	padding: 0 15px 0 15px;
+}
+
+.navigation ul li a {
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	color: var(--link);
+}
+
+.navigation ul li a:hover {
+	text-decoration: underline;
+	color: var(--accent);
+}
+
+#small-nav {
+	display: none;
+}
+
+#content {
+	width: 90%;
+	max-width: 800px;
+	background-color: var(--bg);
+	padding: 10px;
+	margin: 10px auto;
+	min-height: 100%;
+	padding-bottom: 100px;
+}
+
+#content a {
+	color: var(--link);
+}
+
+#content a:hover {
+	color: var(--accent);
+}
+
+#content img {
+	max-width: 100%;
+	height: auto;
+}
+
+#content h1,
+#content h2,
+#content h3,
+#content h4 {
+	padding-top: 20px;
+	color: var(--ctp-lavender);
+}
+
+#content h4 {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+#content th,
+#content td {
+	border: 1px solid var(--border);
+	padding: 5px;
+}
+
+footer {
+	width: 100%;
+	background-color: var(--bg-alt);
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: var(--subtext);
+	border-top: 1px solid var(--border);
+}
+
+.selected {
+	color: var(--accent) !important;
+}
+
+blockquote {
+	font-style: italic;
+	position: relative;
+	color: var(--subtext);
+	border-left: 3px solid var(--border);
+	padding-left: 15px;
+	margin-left: 15px;
+}
+
+blockquote:before {
+	content: "\201C";
+	position: absolute;
+	font-size: 40px;
+	left: -30px;
+	color: var(--quote-mark);
+}
+
+a {
+	color: var(--link);
+}
+
+#content code {
+	color: var(--ctp-peach);
+	background-color: var(--code-bg);
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11pt;
+	padding: 1px 4px;
+	border-radius: 3px;
+}
+
+#content pre {
+	background-color: var(--code-bg);
+	color: var(--code-text);
+	margin-left: 15px;
+	padding: 5px;
+	white-space: pre;
+	display: block;
+	border: 1px solid var(--border);
+	overflow-x: auto;
+}
+
+#content pre code {
+	background-color: transparent;
+	color: inherit;
+	padding: 0;
+}
+
+#content p {
+	line-height: 1.6;
+}
+
+.article-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.article-item {
+	border-bottom: 1px solid var(--border);
+}
+
+.article-item:first-child {
+	border-top: 1px solid var(--border);
+}
+
+.article-item a {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 12px 4px;
+	text-decoration: none;
+	color: var(--text);
+}
+
+.article-item a:hover {
+	color: var(--accent);
+}
+
+.article-date {
+	font-size: 0.8em;
+	color: var(--subtext);
+}
+
+.article-title {
+	font-size: 1.1em;
+	font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+	.skills {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 320px) {
+	#wrapper {
+		width: 100%;
+		margin: 0;
+	}
+	#header {
+		width: 96%;
+	}
+	.navigation ul li {
+		display: block;
+		padding: 10px 10px;
+	}
+	#content {
+		width: 90%;
+		float: none;
+	}
+	#footer {
+		width: 96%;
+	}
+}
