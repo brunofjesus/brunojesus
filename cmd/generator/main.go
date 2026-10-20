@@ -23,6 +23,17 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+var layoutSettings = layout.Settings{
+	SiteName: "Bruno Jesus",
+	SubTitle: "Yet another boring minimalist developer",
+	HeaderLinks: []layout.Link{
+		{Name: "Home", Href: "/"},
+		{Name: "Blog", Href: "/articles"},
+		{Name: "CV", Href: "/cv"},
+		{Name: "Links", Href: "/links"},
+	},
+}
+
 const (
 	MetaTitleKey    = "Title"
 	MetaDateKey     = "Date"
@@ -154,8 +165,12 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, error) {
 	}
 	defer f.Close()
 
-	if err := layout.Page(metadata.Title, buf.String(), metadata.Date).Render(context.Background(), f); err != nil {
-		return nil, err
+	err = layout.Base(
+		layoutSettings,
+		layout.Page(metadata.Title, buf.String(), metadata.Date),
+	).Render(context.Background(), f)
+	if err != nil {
+		return nil, fmt.Errorf("failed to render layout for file %s: %w", mf.sourcePath, err)
 	}
 
 	if !mf.isArticle {
@@ -170,7 +185,11 @@ func renderArticlePage(metadata []layout.PageMetadata) error {
 		return fmt.Errorf("failed to create articles.html: %w", err)
 	}
 	defer f.Close()
-	err = layout.Articles(metadata).Render(context.Background(), f)
+
+	err = layout.Base(
+		layoutSettings,
+		layout.Articles(metadata),
+	).Render(context.Background(), f)
 	if err != nil {
 		return fmt.Errorf("failed to render articles.html: %w", err)
 	}

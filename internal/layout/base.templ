@@ -1,6 +1,6 @@
 package layout
 
-templ Layout(s Settings, title, content string) {
+templ Base(s Settings, content templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -11,7 +11,7 @@ templ Layout(s Settings, title, content string) {
 			<link rel="stylesheet" href="/assets/css/style-catppuccin-latte.css" media="(prefers-color-scheme: light)"/>
 			<link rel="stylesheet" href="/assets/css/code-catppuccin-frappe.css" media="not (prefers-color-scheme: light)"/>
 			<link rel="stylesheet" href="/assets/css/code-catppuccin-latte.css" media="(prefers-color-scheme: light)"/>
-			<title>{ title } | { s.SiteName }</title>
+			<title>{ s.SiteName }</title>
 		</head>
 		<body>
 			<div id="wrapper">
@@ -21,7 +21,7 @@ templ Layout(s Settings, title, content string) {
 					@header(s.HeaderLinks)
 				</header>
 				<main id="content">
-					@templ.Raw(content)
+					@content
 				</main>
 				<footer id="footer">
 					Copyright (c) 2015-2026 Bruno Jesus. Some Rights Reserved.

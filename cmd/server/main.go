@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
 	"log"
@@ -9,25 +8,13 @@ import (
 	"path/filepath"
 
 	static "github.com/brunofjesus/brunojesus"
-	"github.com/brunofjesus/brunojesus/internal/layout"
 )
-
-var layoutSettings layout.Settings = layout.Settings{
-	SiteName: "Bruno Jesus",
-	SubTitle: "Yet another boring minimalist developer",
-	HeaderLinks: []layout.Link{
-		{Name: "Home", Href: "/"},
-		{Name: "Blog", Href: "/articles"},
-		{Name: "CV", Href: "/cv"},
-		{Name: "Links", Href: "/links"},
-	},
-}
 
 func servePage() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		name := r.PathValue("page")
 		if len(name) == 0 {
-			name = "home"
+			name = "index"
 		}
 		name = name + ".html"
 
@@ -39,11 +26,8 @@ func servePage() http.HandlerFunc {
 			return
 		}
 
-		component := layout.Layout(layoutSettings, "", string(f))
-		if err := component.Render(context.Background(), w); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			_, _ = w.Write([]byte(err.Error()))
-		}
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write(f)
 	}
 }
 
