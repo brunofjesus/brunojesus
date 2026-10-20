@@ -13,31 +13,48 @@ Development of [commercetools Frontend](https://commercetools.com/features/front
 Led the transition to multi-tenancy with Kubernetes, and the design and
 implementation of telemetry and observability.
 
+---
+
 ### Escola Superior de Gestão e Tecnologia de Santarém — Invited Assistant
 *2021-10 / 2024-07, 2026-03 / Present*
 
 Taught Relational Databases, Software Engineering, Systems Integration,
 Digital Systems, and Operating Systems.
 
+
+---
+
 ### Mercedes-Benz.io @ Cloudmobility — Senior Software Engineer
 *2021-08 / 2022-02*
 
 Development of cNS (Cloudmobility Namespaces), a private cloud for Daimler.
+
+
+---
 
 ### Volkswagen Digital Solutions @ MAN Digital Hub — Software Engineer
 *2020-03 / 2021-08*
 
 Development of a Manufacturing Execution System for MAN Truck & Bus.
 
+
+---
+
 ### Alter Solutions @ AXA Belgium — Software Engineer
 *2019-06 / 2020-03*
 
 Development of [MyAXA Accident@Work](https://www.axa.be/myaxaaccidentatwork).
 
+
+---
+
 ### Maxdata — Software Engineer
 *2017-06 / 2019-06*
 
 Development of [Clinidata](https://www.maxdata.pt/) healthcare software.
+
+
+---
 
 ### Redislogar — Freelancer Developer
 *2016-02 / 2016-04*
@@ -45,10 +62,16 @@ Development of [Clinidata](https://www.maxdata.pt/) healthcare software.
 Configuration of a custom Linux distribution, system security, and
 development of an update system for their HomePaq machines.
 
+
+---
+
 ### ConnectedTI — Intern
 *2014-06 / 2014-08*
 
 Internship for my specialization course; development of a CRM for a call center.
+
+
+---
 
 ### Wolfd — Junior Developer
 *2012-06 / 2013-09*

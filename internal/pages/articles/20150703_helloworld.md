@@ -5,7 +5,7 @@ Date: Sat, 03 Jul 2015 22:30:00 +0000
 
 Hurray!!! We are online!
 
-As you can see on [About Me](../aboutme) I am an IT student.
+As you can see on [About Me](../aboutme_old) I am an IT student.
 
 I made this site from scratch (almost), it's really simple (took me a few hours to build), the static pages are done in HTML and the blog articles are written in markdown and then converted to HTML, the conversion is made with [Michelf PHP markdown](https://github.com/michelf/php-markdown).
 

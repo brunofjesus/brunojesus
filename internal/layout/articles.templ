@@ -1,0 +1,14 @@
+package layout
+
+import "github.com/brunofjesus/brunojesus/internal/pages"
+import "fmt"
+
+
+templ Articles(articles []pages.PageMetadata) {
+<h1><a href="#">Articles</a> — (<a href="/feed">RSS Feed</a>)</h1>
+<ul>
+  for _, article := range articles {
+    <li>{ article.Date.Format("2006.01.02") } - <a href={ fmt.Sprintf("/articles/%s", article.FileName) }>{ article.Title }</a></li>
+  }
+</ul>
+}
