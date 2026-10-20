@@ -67,6 +67,8 @@ var htmlRenderer = html.New(
 	),
 )
 
+var rssRenderer = html.New(html.WithUnsafe())
+
 func main() {
 	var g errgroup.Group
 	g.Go(generateStylesheets)
@@ -169,8 +171,8 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, templ.Component,
 		return nil, nil, fmt.Errorf("failed to create output directory: %w", err)
 	}
 
-	var buf bytes.Buffer
-	if err := htmlRenderer.Render(&buf, source, doc); err != nil {
+	var htmlBuf bytes.Buffer
+	if err := htmlRenderer.Render(&htmlBuf, source, doc); err != nil {
 		return nil, nil, fmt.Errorf("failed to render HTML for file %s: %w", mf.sourcePath, err)
 	}
 
@@ -182,7 +184,7 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, templ.Component,
 
 	err = layout.Base(
 		layoutSettings,
-		layout.Page(metadata.Title, buf.String(), metadata.Date),
+		layout.Page(metadata.Title, htmlBuf.String(), metadata.Date),
 	).Render(context.Background(), f)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to render layout for file %s: %w", mf.sourcePath, err)
@@ -192,8 +194,12 @@ func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, templ.Component,
 		return nil, nil, nil
 	}
 
+	var rssBuf bytes.Buffer
+	if err := rssRenderer.Render(&rssBuf, source, doc); err != nil {
+		return nil, nil, fmt.Errorf("failed to render RSS HTML for file %s: %w", mf.sourcePath, err)
+	}
 	rssItem := layout.RSSItem(
-		metadata.Title, mf.slug, buf.String(), *metadata.Date,
+		metadata.Title, mf.slug, rssBuf.String(), *metadata.Date,
 	)
 
 	return &metadata, rssItem, nil
