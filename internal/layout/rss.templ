@@ -12,9 +12,9 @@ templ RSSFeed(s Settings, items []templ.Component) {
 			<title>{ s.SiteName } </title>
 			@templ.Raw(fmt.Sprintf("<link>%s</link>", templ.EscapeString("https://brunojesus.pt")))
 			<description>{ s.SubTitle }</description>
-      for _, item := range items {
-        @item 
-      }
+			for _, item := range items {
+				@item
+			}
 		</channel>
 	</rss>
 }
@@ -24,7 +24,7 @@ templ RSSItem(title, path, content string, date time.Time) {
 		<title>{ title }</title>
 		@templ.Raw(fmt.Sprintf("<link>%s</link>", templ.EscapeString(fmt.Sprintf("https://brunojesus.pt/%s", path))))
 		@templ.Raw(fmt.Sprintf("<guid>%s</guid>", templ.EscapeString(fmt.Sprintf("https://brunojesus.pt/%s", path))))
-		<pubDate>{ date.Format("Mon, 02 Jan 2006 15:04:05 MST") }</pubDate>
+		<pubDate>{ date.Format("Mon, 02 Jan 2006 15:04:05 -0700") }</pubDate>
 		<content:encoded>
 			@templ.Raw(fmt.Sprintf("<![CDATA[%s]]>", content))
 		</content:encoded>

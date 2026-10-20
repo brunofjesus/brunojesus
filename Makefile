@@ -5,6 +5,7 @@ BIN     := $(TMP_DIR)/main
 
 ## generate: regenerate Go code from .templ files
 generate:
+	go generate .
 	go tool templ generate
 
 ## build: compile the binary into tmp/main
