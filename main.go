@@ -14,7 +14,12 @@ var content embed.FS
 
 func servePage() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		page := r.PathValue("page")
+		page := r.PathValue("article")
+		if len(page) > 0 {
+			page = "articles/" + page
+		} else {
+			page = r.PathValue("page")
+		}
 		if len(page) == 0 {
 			page = "home"
 		}
@@ -40,6 +45,7 @@ func main() {
 
 	mux.HandleFunc("/{$}", servePage())
 	mux.HandleFunc("/{page}", servePage())
+	mux.HandleFunc("/articles/{article}", servePage())
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
