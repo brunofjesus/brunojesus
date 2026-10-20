@@ -1,22 +1,14 @@
-//go:generate go tool templ generate
-//go:generate go run cmd/generator/main.go
 package main
 
 import (
 	"context"
-	"embed"
 	"log"
 	"net/http"
 	"path/filepath"
 
+	static "github.com/brunofjesus/brunojesus"
 	"github.com/brunofjesus/brunojesus/internal/layout"
 )
-
-//go:embed assets/*
-var assets embed.FS
-
-//go:embed gen/*
-var gen embed.FS
 
 var layoutSettings layout.Settings = layout.Settings{
 	SiteName: "Bruno Jesus",
@@ -38,7 +30,7 @@ func servePage() http.HandlerFunc {
 		name = name + ".html"
 
 		path := filepath.Join("gen", name)
-		f, err := gen.ReadFile(path)
+		f, err := static.Gen.ReadFile(path)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			_, _ = w.Write([]byte(err.Error()))
@@ -56,6 +48,6 @@ func servePage() http.HandlerFunc {
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{page...}", servePage())
-	mux.Handle("/assets/", http.FileServer(http.FS(assets)))
+	mux.Handle("/assets/", http.FileServer(http.FS(static.Assets)))
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }

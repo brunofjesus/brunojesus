@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,6 +20,13 @@ import (
 	"github.com/yuin/goldmark/v2/ast"
 	"github.com/yuin/goldmark/v2/parser"
 	"github.com/yuin/goldmark/v2/renderer/html"
+	"golang.org/x/sync/errgroup"
+)
+
+const (
+	MetaTitleKey    = "Title"
+	MetaDateKey     = "Date"
+	MetaFileNameKey = "FileName"
 )
 
 var (
@@ -28,92 +36,82 @@ var (
 	ErrNoFileNameMetadata = errors.New("no file name metadata")
 )
 
-const (
-	MetaTitleKey    = "Title"
-	MetaDateKey     = "Date"
-	MetaFileNameKey = "FileName"
+var markdownParser = parser.New(
+	parser.WithExtensions(
+		highlighting.Parser,
+		meta.Parser,
+	),
+)
+
+var htmlRenderer = html.New(
+	html.WithUnsafe(),
+	html.WithExtensions(
+		highlighting.NewHTMLRenderer(
+			highlighting.WithFormatterOptions(
+				chromahtml.WithClasses(true),
+				chromahtml.WithLineNumbers(true),
+			),
+		),
+	),
 )
 
 func main() {
-	err := generateStylesheets()
+	var g errgroup.Group
+	g.Go(generateStylesheets)
+	g.Go(renderPages)
+
+	if err := g.Wait(); err != nil {
+		log.Fatalf("error generating site: %v", err)
+	}
+}
+
+// markdownFile holds the paths derived from a source markdown file, computed
+// once so downstream code never has to re-derive them from strings.
+type markdownFile struct {
+	sourcePath   string // e.g. data/articles/foo.md
+	relativePath string // e.g. articles/foo.md
+	outputDir    string // e.g. gen/articles
+	outputPath   string // e.g. gen/articles/foo.html
+	isArticle    bool
+}
+
+func newMarkdownFile(path string) (markdownFile, error) {
+	relativePath, err := filepath.Rel("data", path)
 	if err != nil {
-		fmt.Println(err)
+		return markdownFile{}, fmt.Errorf("failed to get relative path for %s: %w", path, err)
 	}
 
-	err = renderPages()
-	if err != nil {
-		fmt.Println(err)
-	}
+	relativeDir := filepath.Dir(relativePath)
+	htmlFileName := strings.TrimSuffix(filepath.Base(relativePath), ".md") + ".html"
+
+	return markdownFile{
+		sourcePath:   path,
+		relativePath: relativePath,
+		outputDir:    filepath.Join("gen", relativeDir),
+		outputPath:   filepath.Join("gen", relativeDir, htmlFileName),
+		isArticle:    relativeDir == "articles",
+	}, nil
 }
 
 func renderPages() error {
 	var metadataList []layout.PageMetadata
 
-	markdownParser := parser.New(
-		parser.WithExtensions(
-			highlighting.Parser,
-			meta.Parser,
-		),
-	)
-
-	htmlRenderer := html.New(
-		html.WithUnsafe(),
-		html.WithExtensions(
-			highlighting.NewHTMLRenderer(
-				highlighting.WithStyle("monokai"),
-				highlighting.WithFormatterOptions(
-					chromahtml.WithClasses(true),
-					chromahtml.WithLineNumbers(true),
-				),
-			),
-		),
-	)
-
-	err := filepath.WalkDir("data", func(path string, d fs.DirEntry, werr error) error {
+	err := filepath.WalkDir("data", func(path string, d fs.DirEntry, _ error) error {
 		if d.IsDir() || !strings.HasSuffix(path, ".md") {
 			return nil
 		}
 
-		source, err := os.ReadFile(path)
-		if err != nil {
-			return fmt.Errorf("failed to read file %s: %w", path, err)
-		}
-
-		doc := markdownParser.Parse(source)
-
-		relativePath, err := filepath.Rel("data", path)
-		if err != nil {
-			return fmt.Errorf("failed to get relative path for %s: %w", path, err)
-		}
-
-		var metadata layout.PageMetadata
-		if filepath.Dir(relativePath) == "articles" {
-			metadata, err = metadataFromDocument(doc, relativePath)
-			if err != nil {
-				return err
-			}
-			metadataList = append(metadataList, metadata)
-		}
-
-		targetDir := filepath.Join("gen", filepath.Dir(relativePath))
-		if err := os.MkdirAll(targetDir, os.ModePerm); err != nil {
-			return fmt.Errorf("failed to create output directory: %w", err)
-		}
-
-		var buf bytes.Buffer
-		if err := htmlRenderer.Render(&buf, source, doc); err != nil {
-			return fmt.Errorf("failed to render HTML for file %s: %w", path, err)
-		}
-
-		f, err := os.Create("gen/" + strings.TrimSuffix(relativePath, ".md") + ".html")
-		if err != nil {
-			return fmt.Errorf("failed to create HTML file for %s: %w", path, err)
-		}
-		defer f.Close()
-
-		err = layout.Page(metadata.Title, buf.String(), metadata.Date).Render(context.Background(), f)
+		mf, err := newMarkdownFile(path)
 		if err != nil {
 			return err
+		}
+
+		metadata, err := renderMarkdownFile(mf)
+		if err != nil {
+			return err
+		}
+		if metadata != nil {
+			metadataList = append(metadataList, *metadata)
 		}
 
 		return nil
@@ -122,18 +120,62 @@ func renderPages() error {
 		return fmt.Errorf("error walking through data directory: %w", err)
 	}
 
-	// Generate the list
+	return renderArticlePage(metadataList)
+}
+
+func renderMarkdownFile(mf markdownFile) (*layout.PageMetadata, error) {
+	source, err := os.ReadFile(mf.sourcePath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file %s: %w", mf.sourcePath, err)
+	}
+
+	doc := markdownParser.Parse(source)
+
+	var metadata layout.PageMetadata
+	if mf.isArticle {
+		metadata, err = metadataFromDocument(doc, mf.relativePath)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if err := os.MkdirAll(mf.outputDir, os.ModePerm); err != nil {
+		return nil, fmt.Errorf("failed to create output directory: %w", err)
+	}
+
+	var buf bytes.Buffer
+	if err := htmlRenderer.Render(&buf, source, doc); err != nil {
+		return nil, fmt.Errorf("failed to render HTML for file %s: %w", mf.sourcePath, err)
+	}
+
+	f, err := os.Create(mf.outputPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create HTML file for %s: %w", mf.sourcePath, err)
+	}
+	defer f.Close()
+
+	if err := layout.Page(metadata.Title, buf.String(), metadata.Date).Render(context.Background(), f); err != nil {
+		return nil, err
+	}
+
+	if !mf.isArticle {
+		return nil, nil
+	}
+	return &metadata, nil
+}
+
+func renderArticlePage(metadata []layout.PageMetadata) error {
 	f, err := os.Create("gen/articles.html")
 	if err != nil {
 		return fmt.Errorf("failed to create articles.html: %w", err)
 	}
 	defer f.Close()
-	err = layout.Articles(metadataList).Render(context.Background(), f)
+	err = layout.Articles(metadata).Render(context.Background(), f)
 	if err != nil {
 		return fmt.Errorf("failed to render articles.html: %w", err)
 	}
 
-	return err
+	return nil
 }
 
 func metadataFromDocument(doc ast.Node, fileName string) (layout.PageMetadata, error) {
@@ -162,9 +204,6 @@ func metadataFromDocument(doc ast.Node, fileName string) (layout.PageMetadata, e
 
 func generateStylesheets() error {
 	themes := []string{
-		"monokai",
-		"gruvbox",
-		"gruvbox-light",
 		"catppuccin-frappe",
 		"catppuccin-latte",
 	}

@@ -10,12 +10,13 @@ generate:
 ## build: compile the binary into tmp/main
 build:
 	@mkdir -p $(TMP_DIR)
-	go build -o $(BIN) .
+	go generate .
+	go build -o $(BIN) ./cmd/server
 
 ## run: run the server once, without watching
 run:
-	go generate
-	go run .
+	go generate .
+	go run ./cmd/server
 
 ## fmt: format templ files and Go code
 fmt:
