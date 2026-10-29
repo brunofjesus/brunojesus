@@ -19,6 +19,7 @@ import (
 	highlighting "github.com/yuin/goldmark-highlighting/v3"
 	meta "github.com/yuin/goldmark-meta/v2"
 	"github.com/yuin/goldmark/v2/ast"
+	"github.com/yuin/goldmark/v2/extension"
 	"github.com/yuin/goldmark/v2/parser"
 	"github.com/yuin/goldmark/v2/renderer/html"
 	"golang.org/x/sync/errgroup"
@@ -52,6 +53,7 @@ var markdownParser = parser.New(
 	parser.WithExtensions(
 		highlighting.Parser,
 		meta.Parser,
+		extension.NewTableParser(),
 	),
 )
 
@@ -64,10 +66,16 @@ var htmlRenderer = html.New(
 				chromahtml.WithLineNumbers(true),
 			),
 		),
+		extension.NewTableHTMLRenderer(),
 	),
 )
 
-var rssRenderer = html.New(html.WithUnsafe())
+var rssRenderer = html.New(
+	html.WithUnsafe(),
+	html.WithExtensions(
+		extension.NewTableHTMLRenderer(),
+	),
+)
 
 func main() {
 	var g errgroup.Group
