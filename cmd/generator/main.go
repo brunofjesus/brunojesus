@@ -34,6 +34,29 @@ var layoutSettings = layout.Settings{
 		{Name: "CV", Href: "/cv"},
 		{Name: "Links", Href: "/links"},
 	},
+	URL: "https://brunojesus.pt",
+	SEO: layout.SEO{
+		SiteTitle:       "Bruno Jesus | Software Developer",
+		SiteDescription: "Official site of Bruno Jesus, a Software Developer from Portugal.",
+		SchemaOrg: layout.NewSchemaOrg(
+			"Bruno Jesus",
+			"https://brunojesus.pt",
+			"Software Developer",
+			[]string{
+				"Software Development",
+				"Web Development",
+				"Go",
+				"Java",
+				"JavaScript",
+				"Linux",
+				"Open Source",
+			},
+			[]string{
+				"https://github.com/brunofjesus",
+				"https://www.linkedin.com/in/bruno-jesus-0ab943a9",
+			},
+		),
+	},
 }
 
 const (

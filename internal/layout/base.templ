@@ -1,5 +1,7 @@
 package layout
 
+import "fmt"
+
 templ Base(s Settings, content templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -11,7 +13,13 @@ templ Base(s Settings, content templ.Component) {
 			<link rel="stylesheet" href="/assets/css/style-catppuccin-latte.css" media="(prefers-color-scheme: light)"/>
 			<link rel="stylesheet" href="/assets/css/code-catppuccin-frappe.css" media="not (prefers-color-scheme: light)"/>
 			<link rel="stylesheet" href="/assets/css/code-catppuccin-latte.css" media="(prefers-color-scheme: light)"/>
-			<title>{ s.SiteName }</title>
+			<title>{ s.SEO.SiteTitle }</title>
+			@templ.Raw(schemaOrg(s))
+			<meta name="description" content={ s.SEO.SiteDescription }/>
+			<meta property="og:title" content={ s.SEO.SiteTitle }/>
+			<meta property="og:description" content={ s.SEO.SiteDescription }/>
+			<meta property="og:type" content="website"/>
+			<meta property="og:url" content={ s.URL }/>
 		</head>
 		<body>
 			<div id="wrapper">
@@ -29,4 +37,9 @@ templ Base(s Settings, content templ.Component) {
 			</div>
 		</body>
 	</html>
+}
+
+func schemaOrg(s Settings) string {
+	json := s.SEO.SchemaOrg.ToJSON()
+	return fmt.Sprintf("<script type=\"application/ld+json\">%s</script>", json)
 }
